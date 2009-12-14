@@ -22,6 +22,18 @@
 
 echo "<?php\n";
 ?>
+<?php
+echo "/**\n";
+$defaultModel = Inflector::singularize($controllerName);
+echo " * @property {$defaultModel} \${$defaultModel}\n";
+if (count($components)):
+	foreach($components as $component):
+		$componentName = Inflector::camelize($component);
+		echo " * @property {$componentName}Component \${$componentName}\n";
+	endforeach;
+endif;
+echo " */\n";
+?>
 class <?php echo $controllerName; ?>Controller extends <?php echo $plugin; ?>AppController {
 
 	var $name = '<?php echo $controllerName; ?>';
